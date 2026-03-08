@@ -133,7 +133,7 @@ export default function Home() {
 
   return (
     <Container fluid className="mt-4 d-flex flex-column vh-100">
-      <h1 className="text-center mb-4">AI-Powered Markdown & LaTeX Renderer</h1>
+      <h1 className="text-center mb-4 d-print-none">AI-Powered Markdown & LaTeX Renderer</h1>
       <div className="d-flex flex-grow-1">
         {isClient && !isPreviewFullScreen && (
           <ResizableBox
@@ -143,7 +143,7 @@ export default function Home() {
             minConstraints={[window.innerWidth * 0.1, Infinity]}
             maxConstraints={[window.innerWidth * 0.8, Infinity]}
             onResize={(e, { size }) => setWidth(size.width)}
-            className="d-flex flex-column"
+            className="d-flex flex-column d-print-none"
           >
             <Form.Group controlId="editor-input" className="d-flex flex-column flex-grow-1">
               <Form.Label className="d-flex justify-content-between align-items-center">
@@ -170,14 +170,17 @@ export default function Home() {
         )}
         <div className="d-flex flex-column flex-grow-1" style={{ width: isPreviewFullScreen ? '100%' : (isClient ? `calc(100% - ${width}px)`: '75%') }}>
           <Form.Group controlId="preview-output" className="d-flex flex-column flex-grow-1">
-            <Form.Label className="d-flex justify-content-between align-items-center">
+            <Form.Label className="d-flex justify-content-between align-items-center d-print-none">
               <span>Preview</span>
               <div>
                 <Button variant="outline-secondary" size="sm" onClick={() => setIsPreviewFullScreen(!isPreviewFullScreen)} className="me-2">
                   {isPreviewFullScreen ? "Exit Fullscreen" : "Fullscreen"}
                 </Button>
-                <Button variant="outline-primary" size="sm" onClick={handleCopyToImage}>
+                <Button variant="outline-primary" size="sm" onClick={handleCopyToImage} className="me-2">
                   {copyButtonText}
+                </Button>
+                <Button variant="outline-success" size="sm" onClick={() => window.print()}>
+                  Export PDF
                 </Button>
               </div>
             </Form.Label>

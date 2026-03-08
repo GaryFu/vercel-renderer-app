@@ -40,3 +40,55 @@ a {
     color-scheme: dark;
   }
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .preview-pane,
+  .preview-pane * {
+    visibility: visible;
+  }
+
+  .preview-pane {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    margin: 0;
+    padding: 0 !important;
+    border: none !important;
+    overflow: visible !important;
+    background: transparent;
+  }
+
+  .d-print-none {
+    display: none !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 20mm;
+  }
+
+  p,
+  pre,
+  blockquote,
+  img,
+  table,
+  .math {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+}
