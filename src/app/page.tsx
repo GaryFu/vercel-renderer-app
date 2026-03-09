@@ -114,8 +114,8 @@ export default function Home() {
     const bstr = atob(arr[1]);
     let n = bstr.length;
     const u8arr = new Uint8Array(n);
-    while(n--) u8arr[n] = bstr.charCodeAt(n);
-    return new Blob([u8arr], {type:mime});
+    while (n--) u8arr[n] = bstr.charCodeAt(n);
+    return new Blob([u8arr], { type: mime });
   }
 
   useEffect(() => {
@@ -134,7 +134,7 @@ export default function Home() {
   return (
     <Container fluid className="mt-4 d-flex flex-column vh-100">
       <h1 className="text-center mb-4 d-print-none">AI-Powered Markdown & LaTeX Renderer</h1>
-      <div className="d-flex flex-grow-1">
+      <div className="d-flex flex-column flex-md-row flex-grow-1 overflow-hidden">
         {isClient && !isPreviewFullScreen && (
           <ResizableBox
             width={width}
@@ -143,13 +143,13 @@ export default function Home() {
             minConstraints={[window.innerWidth * 0.1, Infinity]}
             maxConstraints={[window.innerWidth * 0.8, Infinity]}
             onResize={(e, { size }) => setWidth(size.width)}
-            className="d-flex flex-column d-print-none"
+            className="d-flex flex-column d-print-none responsive-sidebar mb-3 mb-md-0"
           >
             <Form.Group controlId="editor-input" className="d-flex flex-column flex-grow-1">
-              <Form.Label className="d-flex justify-content-between align-items-center">
-                <span>Input</span>
-                <div>
-                  <Button variant="outline-secondary" size="sm" onClick={handlePaste} className="me-2">
+              <Form.Label className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
+                <span className="fw-bold">Input</span>
+                <div className="d-flex flex-wrap gap-2">
+                  <Button variant="outline-secondary" size="sm" onClick={handlePaste}>
                     Paste
                   </Button>
                   <Button variant="primary" size="sm" onClick={handleAIOptimize} disabled={isOptimizing}>
@@ -168,15 +168,15 @@ export default function Home() {
             </Form.Group>
           </ResizableBox>
         )}
-        <div className="d-flex flex-column flex-grow-1" style={{ width: isPreviewFullScreen ? '100%' : (isClient ? `calc(100% - ${width}px)`: '75%') }}>
+        <div className="d-flex flex-column flex-grow-1 preview-pane-container" style={{ width: isPreviewFullScreen ? '100%' : (isClient && window.innerWidth >= 768 ? `calc(100% - ${width}px)` : '100%') }}>
           <Form.Group controlId="preview-output" className="d-flex flex-column flex-grow-1">
-            <Form.Label className="d-flex justify-content-between align-items-center d-print-none">
-              <span>Preview</span>
-              <div>
-                <Button variant="outline-secondary" size="sm" onClick={() => setIsPreviewFullScreen(!isPreviewFullScreen)} className="me-2">
+            <Form.Label className="d-flex flex-wrap justify-content-between align-items-center gap-2 d-print-none mb-2">
+              <span className="fw-bold">Preview</span>
+              <div className="d-flex flex-wrap gap-2">
+                <Button variant="outline-secondary" size="sm" onClick={() => setIsPreviewFullScreen(!isPreviewFullScreen)}>
                   {isPreviewFullScreen ? "Exit Fullscreen" : "Fullscreen"}
                 </Button>
-                <Button variant="outline-primary" size="sm" onClick={handleCopyToImage} className="me-2">
+                <Button variant="outline-primary" size="sm" onClick={handleCopyToImage}>
                   {copyButtonText}
                 </Button>
                 <Button variant="outline-success" size="sm" onClick={() => window.print()}>
@@ -188,6 +188,10 @@ export default function Home() {
               <ReactMarkdown
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeKatex, rehypeRaw]}
+                components={{
+                  table: ({ node, ...props }) => <table className="table table-bordered table-striped mt-3 mb-3" {...props} />,
+                  thead: ({ node, ...props }) => <thead className="table-light" {...props} />
+                }}
               >
                 {processCitations(input)}
               </ReactMarkdown>

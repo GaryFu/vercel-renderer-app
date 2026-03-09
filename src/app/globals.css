@@ -61,6 +61,10 @@ a {
     border: none !important;
     overflow: visible !important;
     background: transparent;
+    font-size: 0.9em;
+    /* 调小一号 */
+    line-height: 1.2 !important;
+    /* 缩小到1.2倍 */
   }
 
   .d-print-none {
@@ -91,4 +95,32 @@ a {
     page-break-after: avoid;
     break-after: avoid;
   }
+}
+
+/* Responsive Layout Fixes */
+@media (max-width: 767.98px) {
+  .vh-100 {
+    height: auto !important;
+    min-height: 100vh;
+  }
+
+  .responsive-sidebar {
+    width: 100% !important;
+    height: 400px !important;
+    /* Give it a fixed height on mobile or let it grow */
+    max-width: 100% !important;
+  }
+
+  .react-resizable-handle {
+    display: none !important;
+  }
+
+  .preview-pane-container {
+    width: 100% !important;
+    flex-grow: 1;
+  }
+}
+
+.preview-pane {
+  min-height: 300px;
 }
