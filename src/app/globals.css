@@ -57,13 +57,12 @@ a {
     top: 0;
     width: 100vw;
     margin: 0;
+    padding: 0 !important;
     border: none !important;
     overflow: visible !important;
     background: transparent;
     font-size: 0.9em;
     line-height: 1.5 !important;
-    padding: 15mm !important;
-    /* 页眉页脚已去除，用padding代替页边距 */
   }
 
   .d-print-none {
@@ -72,8 +71,8 @@ a {
 
   @page {
     size: A4 portrait;
-    margin: 0;
-    /* 去掉页眉页脚 */
+    margin: 20mm;
+    /* 保留页面边距，浏览器在此区域打印页码等信息 */
   }
 
   p,
