@@ -168,8 +168,8 @@ export default function Home() {
             </Form.Group>
           </ResizableBox>
         )}
-        <div className="d-flex flex-column flex-grow-1 preview-pane-container overflow-hidden" style={{ width: isPreviewFullScreen ? '100%' : (isClient && window.innerWidth >= 768 ? `calc(100% - ${width}px)` : '100%') }}>
-          <Form.Group controlId="preview-output" className="d-flex flex-column flex-grow-1 overflow-hidden">
+        <div className="d-flex flex-column flex-grow-1 preview-pane-container" style={{ width: isPreviewFullScreen ? '100%' : (isClient && window.innerWidth >= 768 ? `calc(100% - ${width}px)` : '100%') }}>
+          <Form.Group controlId="preview-output" className="d-flex flex-column flex-grow-1" style={{ minHeight: 0 }}>
             <Form.Label className="d-flex flex-wrap justify-content-between align-items-center gap-2 d-print-none mb-2">
               <span className="fw-bold">Preview</span>
               <div className="d-flex flex-wrap gap-2">
@@ -184,7 +184,7 @@ export default function Home() {
                 </Button>
               </div>
             </Form.Label>
-            <div ref={previewRef} className="preview-pane p-3 border rounded flex-grow-1 overflow-auto bg-light">
+            <div ref={previewRef} className="preview-pane p-3 border rounded flex-grow-1 overflow-auto" style={{ minHeight: 0 }}>
               <ReactMarkdown
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeKatex, rehypeRaw]}

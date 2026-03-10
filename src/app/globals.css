@@ -115,38 +115,12 @@ a {
     display: none !important;
   }
 
-  .min-height-0 {
-    min-height: 0;
-  }
-
-  .preview-pane {
+  .preview-pane-container {
+    width: 100% !important;
     flex-grow: 1;
-    overflow-y: auto !important;
-    background-color: #f8f9fa;
-    line-height: 1.5;
-    height: 0;
-    /* Important in flex-column to force growth to fill space and trigger scrollbar */
   }
+}
 
-
-  .preview-pane ol,
-  .preview-pane ul {
-    padding-left: 2rem;
-  }
-
-  .preview-pane li {
-    margin-bottom: 0.5rem;
-  }
-
-  sup {
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline;
-    top: -0.5em;
-    font-size: 75%;
-  }
-
-  .react-resizable-handle {
-    background: #ddd;
-  }
+.preview-pane {
+  min-height: 300px;
 }
