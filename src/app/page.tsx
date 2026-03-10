@@ -168,8 +168,8 @@ export default function Home() {
             </Form.Group>
           </ResizableBox>
         )}
-        <div className="d-flex flex-column flex-grow-1 preview-pane-container" style={{ width: isPreviewFullScreen ? '100%' : (isClient && window.innerWidth >= 768 ? `calc(100% - ${width}px)` : '100%') }}>
-          <Form.Group controlId="preview-output" className="d-flex flex-column flex-grow-1">
+        <div className="d-flex flex-column flex-grow-1 preview-pane-container overflow-hidden" style={{ width: isPreviewFullScreen ? '100%' : (isClient && window.innerWidth >= 768 ? `calc(100% - ${width}px)` : '100%') }}>
+          <Form.Group controlId="preview-output" className="d-flex flex-column flex-grow-1 overflow-hidden">
             <Form.Label className="d-flex flex-wrap justify-content-between align-items-center gap-2 d-print-none mb-2">
               <span className="fw-bold">Preview</span>
               <div className="d-flex flex-wrap gap-2">
@@ -184,7 +184,7 @@ export default function Home() {
                 </Button>
               </div>
             </Form.Label>
-            <div ref={previewRef} className="preview-pane p-3 border rounded flex-grow-1 overflow-auto">
+            <div ref={previewRef} className="preview-pane p-3 border rounded flex-grow-1 overflow-auto bg-light">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeKatex, rehypeRaw]}
@@ -200,7 +200,7 @@ export default function Home() {
         </div>
       </div>
       <style jsx global>{`
-        .preview-pane { background-color: #f8f9fa; line-height: 1.8; }
+        .preview-pane { background-color: #f8f9fa; line-height: 1.5; overflow-y: auto; }
         .preview-pane ol, .preview-pane ul { padding-left: 2rem; }
         .preview-pane li { margin-bottom: 0.5rem; }
         sup { line-height: 0; position: relative; vertical-align: baseline; top: -0.5em; font-size: 75%; }
